@@ -12,10 +12,11 @@ const Navbar = () => {
     { name: "Home", path: "/" },
 
     { name: "Dashboard", path: "/dashboard" },
+    { name: "Login", path: "/login" },
   ];
 
   return (
-    <nav className=" py-5 md:pt-10 relative z-[99] overflow-hidden  px-2 sm:px-4 rounded bg-zinc-900">
+    <nav className=" py-5  md:pt-10 relative z-[99] overflow-hidden  px-2 sm:px-4 rounded bg-zinc-900">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <a href="#" className="  hidden lg:flex ">
           <svg
@@ -81,11 +82,11 @@ const Navbar = () => {
           className={`${isOpen ? "block" : "hidden"} w-full md:block md:w-auto`}
           id="mobile-menu"
         >
-          <div className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+          <div className="flex flex-col gap-2 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
             {NavbarPath.map((item, index) => (
               <div key={index} className="relative">
                 <NavLink to={item.path}>
-                  <h1 className="text-2xl md:text-3xl lg:text-4xl text-white font-bold after:content-[''] after:bg-white after:h-[3px] after:w-[0%] after:left-0 after:-bottom-[5px] after:rounded-xl after:duration-300 after:absolute hover:after:w-[100%] ">
+                  <h1 className="text-2xl text-center md:text-3xl lg:text-4xl text-white font-bold after:content-[''] after:bg-white after:h-[3px] after:w-[0%] after:left-0 after:-bottom-[5px] after:rounded-xl after:duration-300 after:absolute hover:after:w-[100%] ">
                     {item.name}
                   </h1>
                 </NavLink>
