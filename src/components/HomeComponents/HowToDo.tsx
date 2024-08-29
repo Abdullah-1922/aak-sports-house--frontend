@@ -1,4 +1,11 @@
-const HowToDo = ({ secRef, imageRef, image }) => {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+type THowToDoProps = {
+  secRef: any;
+  imageRef: any;
+  image: string;
+};
+const HowToDo = ({ secRef, imageRef, image }: THowToDoProps) => {
   return (
     <section
       ref={secRef}

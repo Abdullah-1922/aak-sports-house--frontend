@@ -1,6 +1,13 @@
+import { ReactNode } from "react";
+
+type TCountProps ={
+	title:string;
+	counter:ReactNode;
+	measurement:string
+}
 
 
-const CounterItem = ({ title, counter, measurement }) => {
+const CounterItem = ({ title, counter, measurement }:TCountProps) => {
 	return (
 		<div className="mb-20 sm:mb-0">
 			<h2 className="text-4xl text-center text-secondary-dark dark:text-secondary-light mb-2">

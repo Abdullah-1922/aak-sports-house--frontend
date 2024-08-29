@@ -10,7 +10,7 @@ const HomeCounter = () => {
   return (
     <div  
 	
-	className=" px-20 bg-blue-700  text-white  shadow-sm">
+	className=" px-20 w-[60vw] mx-auto border mt-10  text-white  shadow-sm">
       <div className=" container mx-auto py-20 block sm:flex sm:justify-between items-center">
         <CounterItem
           title="Weekly user"

@@ -6,3 +6,24 @@
   font-family: myFont;
   src: url(./assets/myFont.ttf);
 }
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu-light .ant-menu-item, :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light>.ant-menu .ant-menu-item, :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light .ant-menu-submenu-title, :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light>.ant-menu .ant-menu-submenu-title {
+
+  font-weight: 700;
+  font-size: larger;
+  
+}
+
+
+
+/* :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light .ant-menu-item.ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu-light>.ant-menu .ant-menu-item.ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu-light .ant-menu-submenu-title.ant-menu-submenu-open,
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu-light>.ant-menu .ant-menu-submenu-title.ant-menu-submenu-open {
+  color: black;
+}
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu-light .ant-menu-item:hover,
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu-light>.ant-menu .ant-menu-item:hover,
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu-light .ant-menu-submenu-title:hover,
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu-light>.ant-menu .ant-menu-submenu-title:hover {
+  color: black;
+}  */
