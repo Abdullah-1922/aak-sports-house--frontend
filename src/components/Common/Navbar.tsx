@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,10 +9,30 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+const currentUser =useAppSelector(state=>state.auth.user)
+
+
   const NavbarPath = [
     { name: "Home", path: "/" },
 
-    { name: "Dashboard", path: "/dashboard" },
+    { name: "Dashboard", path: `/${currentUser.role}/dashboard` },
     { name: "Login", path: "/login" },
   ];
 

@@ -9,19 +9,12 @@ import AdminDashboard from "../pages/Admin/AdminDashboard";
 import CreateFacility from "../pages/Admin/CreateFacility";
 import { sidebarItemsGenerator } from "../utils/sidebarItemsGenerator";
 import { Outlet } from "react-router-dom";
+import DashboardAllFacilities from "../pages/Admin/DashboardAllFacilities";
 
-const { Content, Footer, Sider } = Layout;
 
-const items = [
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  UserOutlined,
-].map((icon, index) => ({
-  key: String(index + 1),
-  icon: React.createElement(icon),
-  label: `nav ${index + 1}`,
-}));
+const { Content,  Sider } = Layout;
+
+
 
 export const adminItems = [
   {
@@ -36,6 +29,11 @@ export const adminItems = [
         name: "Create Facility",
         path: "create-facility",
         element: <CreateFacility />,
+      },
+      {
+        name: "Facilities",
+        path: "facilities",
+        element: <DashboardAllFacilities/>,
       },
     ],
   },

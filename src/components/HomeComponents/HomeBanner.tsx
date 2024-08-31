@@ -17,13 +17,12 @@ const HomeBanner = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initial check
+    handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   return (
-    <div className="w-full   lg:px-[10vw] bg-zinc-900 text-white  bg-fixed bg-cover bg-center  h-screen  xl:min-h-[100vh] flex items-center  relative z-[9999]     ">
+    <div className="w-full   lg:px-[10vw] bg-gray-50 text-black  bg-fixed bg-cover bg-center  h-screen  xl:min-h-[100vh] flex items-center  relative z-[9999]     ">
       <div className=" w-1/2  mx-auto  text-center lg:text-start    ">
         {["Play", "Train", "Achieve"].map((item, index) => (
           <div key={index} className="masker">

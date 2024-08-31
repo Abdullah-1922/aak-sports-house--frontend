@@ -14,10 +14,8 @@ const InputComponent = ({ type, name, label }: TInputProps) => {
       <Controller
         name={name}
         render={({ field }) => (
-          <Form.Item
-            label={<span style={{ color: 'black' }}>{label}</span>}
-          >
-            <Input required {...field} type={type} id={name} />
+          <Form.Item  label={<span style={{ color: "black" ,fontSize:'20px', }}>{label}</span>}>
+            <Input size="large" className="py-3" required {...field} type={type} id={name} />
           </Form.Item>
         )}
       />
