@@ -1,0 +1,50 @@
+.custom-carousel .slick-dots li button {
+  background-color: black !important;
+}
+
+.custom-carousel .slick-dots li.slick-active button {
+  background-color: black !important;
+}
+
+.custom-arrow {
+  background-color: black;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1; /* Make sure the arrows appear on top of the carousel */
+  position: absolute;
+  top: 50%; /* Aligns the arrow vertically in the middle */
+  transform: translateY(-50%); /* Adjusts for the height of the arrow */
+}
+
+/* Next arrow positioning */
+.next-arrow {
+  right: 10px; /* Position the next arrow on the right side */
+}
+
+/* Previous arrow positioning */
+.prev-arrow {
+  left: 10px; /* Position the previous arrow on the left side */
+}
+
+/* Arrow icon styling */
+.custom-arrow::before {
+  content: "";
+  border: solid white; /* Make the arrow icon white to contrast against the black background */
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 10px;
+}
+
+/* Next arrow rotation */
+.next-arrow::before {
+  transform: rotate(-45deg);
+}
+
+/* Previous arrow rotation */
+.prev-arrow::before {
+  transform: rotate(135deg);
+}

@@ -8,7 +8,7 @@ const HomeCounter = () => {
   useCountUp({ ref: "projectsCounter", end: 77, duration: 2 });
 
   return (
-    <div className=" px-20 w-[60vw] z-[9999] relative mx-auto border mt-10  text-white  shadow-sm">
+    <div className=" px-20 w-[60vw] z-[9999] relative mx-auto border mt-10 bg-zinc-900 rounded-3xl text-white   shadow-sm">
       <div className=" container mx-auto py-20  flex flex-col  lg:flex-row sm:justify-between items-center">
         <CounterItem
           title="Weekly user"

@@ -35,7 +35,7 @@ const FormComponent = ({
   const methods = useForm(formConfig);
   const submit = (data: any) => {
     onSubmit(data);
-    methods.reset();
+    // methods.reset();
   };
   return (
     <FormProvider {...methods}>

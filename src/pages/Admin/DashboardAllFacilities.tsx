@@ -1,7 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { useGetFacilitiesQuery } from "../../redux/features/facility/facilityApi";
+import {
+  useDeleteFacilityMutation,
+  useGetFacilitiesQuery,
+} from "../../redux/features/facility/facilityApi";
 import { TProps } from "../../types";
 import { Button, Table } from "antd";
+import Swal from "sweetalert2";
 
 const DashboardAllFacilities = () => {
   const [params, setParams] = useState<TProps[]>([]);
@@ -11,6 +16,38 @@ const DashboardAllFacilities = () => {
     isLoading,
     isFetching,
   } = useGetFacilitiesQuery(params);
+
+  const [deleteFacility] = useDeleteFacilityMutation();
+
+  const handleDelete = async (id: string) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await deleteFacility(id);
+
+          if (res.data.success == true) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    });
+  };
+
   console.log(semesterData);
   console.log({ isLoading, isFetching });
   const tableData = semesterData?.data?.map(
@@ -79,10 +116,15 @@ const DashboardAllFacilities = () => {
       title: "Action",
       dataIndex: "action",
       key: "x",
-      render: () => {
+      render: (_, record: any) => {
         return (
           <div>
-            <Button className="bg-red-500 text-white font-bold">Delete</Button>
+            <Button
+              onClick={() => handleDelete(record.key)}
+              className="bg-red-500 text-white font-bold"
+            >
+              Delete
+            </Button>
           </div>
         );
       },
@@ -115,7 +157,7 @@ const DashboardAllFacilities = () => {
   return (
     <Table
       size="small"
-      className="overflow-x-auto min-h-screen bg-[#F5F5F5] min-w-[900px]"
+      className="overflow-x-auto min-h-screen bg-[#F5F5F5] min-w-[1000px]"
       columns={columns}
       loading={isFetching}
       dataSource={tableData}

@@ -5,10 +5,11 @@ import HowToDo from "../components/HomeComponents/HowToDo";
 import HomeCounter from "../components/HomeComponents/HomeCountUp";
 import LocomotiveScroll from "locomotive-scroll";
 import HomeMarquee from "../components/HomeComponents/HomeMarquee";
-import HomeAbout from "../components/HomeComponents/HomeAbout";
+import HomeAbout from "../components/AboutPageComponents/AboutPageBanner";
 import HomeBanner from "../components/HomeComponents/HomeBanner";
 import HomePageCards from "../components/HomeComponents/HomePageCards";
-import Navbar from "../components/Common/Navbar";
+import HomePageTestimonials from "../components/HomeComponents/HomePageTestimonials";
+import HomePageImageGallery from "../components/HomeComponents/HomePageImageGallery";
 
 const HomePage = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -44,20 +45,20 @@ const HomePage = () => {
 
   return (
     <div>
-      <Navbar/>
-      {/* Hero Section */}
-      <HomeBanner/>
+    
+      <HomeBanner />
 
-      {/* How to Do Section */}
+   
       <HowToDo secRef={sectionRef} imageRef={imageRef} image={howtodo} />
-      {/* <HomeCounter/> */}
+     
       <HomeCounter />
-      {/* Home marquee */}
+     
       <HomeMarquee />
 
-      {/* about  */}
-      <HomeAbout />
-      <HomePageCards/>
+     
+      <HomePageCards />
+      <HomePageTestimonials/>
+      <HomePageImageGallery/>
     </div>
   );
 };

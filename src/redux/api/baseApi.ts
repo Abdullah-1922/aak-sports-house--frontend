@@ -10,6 +10,7 @@ export const baseApi = createApi({
  
     baseUrl: "http://localhost:3000/api",
     credentials: 'include',
+    
     prepareHeaders:(headers,{getState})=>{
       const token =(getState() as RootState).auth.token
       if (token) {
@@ -18,7 +19,7 @@ export const baseApi = createApi({
       return headers;
     }
   }),
-  tagTypes: [],
+  tagTypes: ['facility','bookingsByUser','getAllBookings'],
   endpoints: () => ({}),
 });
 

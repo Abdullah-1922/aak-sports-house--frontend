@@ -10,12 +10,12 @@ const facilityApi = baseApi.injectEndpoints({
           url: query ? `/facility?${query}` : `/facility`,
         };
       },
+      providesTags: ["facility"],
     }),
     getSingleFacility: builder.query({
       query: (id: any) => {
-        console.log(id, "from query");
         return {
-          url: `/facilities/${id}`,
+          url: `/facility/${id}`,
         };
       },
     }),
@@ -27,6 +27,7 @@ const facilityApi = baseApi.injectEndpoints({
           method: "POST",
         };
       },
+      invalidatesTags: ["facility"],
     }),
     updateFacility: builder.mutation({
       query: (payload) => {
@@ -38,15 +39,24 @@ const facilityApi = baseApi.injectEndpoints({
           method: "PATCH",
         };
       },
+      invalidatesTags: ["facility"],
     }),
     deleteFacility: builder.mutation({
       query: (payload) => {
         return {
-          url: `/facilities/${payload}`,
+          url: `/facility/${payload}`,
 
           method: "DELETE",
         };
       },
+      invalidatesTags: ["facility"],
+    }),
+
+    checkAvailability: builder.mutation({
+      query: ({id,date}) => ({
+        url: `/check-availability/${id}?date=${date}`,
+        method: "POST",
+      }),
     }),
   }),
 });
@@ -56,4 +66,5 @@ export const {
   useGetSingleFacilityQuery,
   useCreateFacilityMutation,
   useDeleteFacilityMutation,
+  useCheckAvailabilityMutation
 } = facilityApi;

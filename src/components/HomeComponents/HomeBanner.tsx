@@ -22,7 +22,7 @@ const HomeBanner = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
-    <div className="w-full   lg:px-[10vw] bg-gray-50 text-black  bg-fixed bg-cover bg-center  h-screen  xl:min-h-[100vh] flex items-center  relative z-[9999]     ">
+    <div className="w-full   lg:px-[10vw] bg-gray-50 text-black     h-screen  xl:min-h-[100vh] flex items-center  relative z-[9]     ">
       <div className=" w-1/2  mx-auto  text-center lg:text-start    ">
         {["Play", "Train", "Achieve"].map((item, index) => (
           <div key={index} className="masker">

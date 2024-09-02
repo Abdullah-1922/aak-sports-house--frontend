@@ -24,7 +24,7 @@ const HowToDo = ({ secRef, imageRef, image }: THowToDoProps) => {
       />
 
       {/* Text Part */}
-      <div className=" xl:w-1/2  ml-auto h-full xl:h-[100vh]  flex flex-col justify-center items-center relative z-[1]">
+      <div className=" xl:w-1/2  ml-auto h-full bg-zinc-900 xl:h-[100vh]  flex flex-col justify-center items-center relative z-[1]">
         {/* How its works */}
 
         <section
