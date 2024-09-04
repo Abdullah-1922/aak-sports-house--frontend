@@ -53,7 +53,7 @@ const facilityApi = baseApi.injectEndpoints({
     }),
 
     checkAvailability: builder.mutation({
-      query: ({id,date}) => ({
+      query: ({ id, date }) => ({
         url: `/check-availability/${id}?date=${date}`,
         method: "POST",
       }),
@@ -66,5 +66,6 @@ export const {
   useGetSingleFacilityQuery,
   useCreateFacilityMutation,
   useDeleteFacilityMutation,
-  useCheckAvailabilityMutation
+  useCheckAvailabilityMutation,
+  useUpdateFacilityMutation
 } = facilityApi;

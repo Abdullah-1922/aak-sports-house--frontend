@@ -9,8 +9,10 @@ import FacilityDetails from "../pages/FacilityDetails";
 import BookingFacility from "../pages/BookingFacility";
 import About from "../pages/About";
 import ContactUs from "../pages/ContactUs";
-import SignUp from "../pages/Signup";
+
 import ProtectedRoute from "../layout/ProtectedRoute";
+import BookingPageWithPayment from "../pages/BookingPageWithPayment";
+import SignUp from "../pages/SignUp";
 
 export const router = createBrowserRouter([
   {
@@ -43,7 +45,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/book-facility/:id",
-        element: <BookingFacility />,
+        element: <ProtectedRoute><BookingPageWithPayment /></ProtectedRoute> ,
       },
     ],
   },

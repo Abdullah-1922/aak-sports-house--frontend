@@ -60,7 +60,7 @@ const App: React.FC = () => {
     <Layout>
       <Sider
         breakpoint="lg"
-        style={{backgroundColor:'white'}}
+        style={{ backgroundColor: "white" }}
         collapsedWidth="0"
         onBreakpoint={(broken) => {
           console.log(broken);
@@ -69,8 +69,8 @@ const App: React.FC = () => {
           console.log(collapsed, type);
         }}
       >
-        <div className="bg-white pt-10  min-h-screen">
-          <p className="">{currentUser && currentUser.name}</p>
+        <div className="bg-white pt-4  min-h-screen">
+          <p className=" text-lg text-center font-bold underline pb-5">{currentUser && currentUser.name}</p>
           <Menu mode="inline" items={newItems} />
         </div>
       </Sider>

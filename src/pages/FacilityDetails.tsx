@@ -1,12 +1,17 @@
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetSingleFacilityQuery } from "../redux/features/facility/facilityApi";
 import { Button } from "antd";
+import { useAppSelector } from "../redux/hooks";
+import toast from "react-hot-toast";
 
 
 const FacilityDetails = () => {
   const params = useParams();
 
   const { data, isLoading } = useGetSingleFacilityQuery(params.id);
+ const user=useAppSelector(state=>state.auth.user)
+const navigate =useNavigate()
+
 
   if (isLoading) {
     return <div className="text-3xl text-center py-40">Loading</div>;
@@ -29,9 +34,16 @@ const FacilityDetails = () => {
         <p className="font-bold bg-black text-white w-fit  px-3 mt-3 rounded-3xl">
           ${card.pricePerHour}
         </p>
-        <Link to={`/book-facility/${card._id}`}> <Button size="large" className="bg-black mt-10  text-white w-full ">
+        <div  onClick={()=>{
+       if(user?.role === 'admin'){return toast.error('admin can not book facility' )}else{
+        navigate(`/book-facility/${card._id}`)
+       }
+        }}>
+        <Button size="large" className="bg-black mt-10  text-white w-full ">
           Book Now
-        </Button></Link>
+        </Button>
+        </div>
+       
        
       </div>
     </div>

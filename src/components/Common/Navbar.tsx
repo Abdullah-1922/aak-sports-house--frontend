@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import ProfileMenu from "./ProfileMenu";
 
@@ -9,7 +9,6 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-  const navigate = useNavigate();
 
   const currentUser = useAppSelector((state) => state.auth.user);
 
@@ -74,7 +73,15 @@ const Navbar = () => {
             {NavbarPath.map((item, index) => {
               return (
                 <div key={index} className="relative">
-                  <NavLink to={currentUser ? item.path : "/login"}>
+                  <NavLink
+                    to={
+                      currentUser
+                        ? item.path
+                        : item.name !== "Dashboard"
+                        ? item.path
+                        : "/login"
+                    }
+                  >
                     <h1 className="text-2xl text-center md:text-2xl text-white font-bold after:content-[''] after:bg-white after:h-[3px] after:w-[0%] after:left-0 after:-bottom-[5px] after:rounded-xl after:duration-300 after:absolute hover:after:w-[100%] ">
                       {item.name}
                     </h1>

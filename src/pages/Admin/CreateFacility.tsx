@@ -6,7 +6,7 @@ import { useCreateFacilityMutation } from "../../redux/features/facility/facilit
 
 const CreateFacility = () => {
   const [createFacility, { isLoading }] = useCreateFacilityMutation();
-  const onSubmit = async (data:any) => {
+  const onSubmit = async (data: any) => {
     try {
       const result = await createFacility({
         ...data,

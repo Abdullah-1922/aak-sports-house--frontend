@@ -1,11 +1,15 @@
-import { useParams } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useCheckAvailabilityMutation,
   useGetSingleFacilityQuery,
 } from "../redux/features/facility/facilityApi";
 import { FormEvent, useState } from "react";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 import { useCreateBookingMutation } from "../redux/features/facility/bookingApi";
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import { useAppSelector } from "../redux/hooks";
+import toast from "react-hot-toast";
 
 type TSlotTime = {
   startTime: string;
@@ -13,28 +17,125 @@ type TSlotTime = {
 };
 
 const BookingFacility = () => {
+  const stripe = useStripe();
+  const elements = useElements();
   const date = new Date();
   const formattedDate = date.toISOString().split("T")[0];
   const params = useParams();
   const { data, isLoading } = useGetSingleFacilityQuery(params.id);
-
+  const user = useAppSelector((state) => state.auth.user);
   const [selectedDate, setSelectedDate] = useState(formattedDate);
   const [freeSlotData, setFreeSlotData] = useState<TSlotTime[]>([]);
-
-  const [freeSlot] = useCheckAvailabilityMutation();
-  // Handling proceeding to booking
+  const [showModal, setShowModal] = useState(false);
   const [startTime, setStartTime] = useState<string>("");
   const [endTime, setEndTime] = useState<string>("");
+  const [createBooking] = useCreateBookingMutation();
+  const [payload, setPayload] = useState<any>(null);
+  const [finalData, setFinalData] = useState<any>(null);
+
+  const navigate = useNavigate();
+
+  const [freeSlot] = useCheckAvailabilityMutation();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const payload = {
+    if (!stripe || !elements) {
+      return;
+    }
+    if (!user) {
+      return navigate("/login");
+    }
+    if (user.role === "admin") {
+      return toast.error("admin can not book facility");
+    }
+    if (isLoading) {
+      return <>Loading</>;
+    }
+    const realStartTime = new Date(`1970-01-01T${startTime}:00Z`).getTime();
+    const realEndTime = new Date(`1970-01-01T${endTime}:00Z`).getTime();
+    if (realStartTime > realEndTime) {
+      return toast.error("Select valid time.");
+    }
+    const durationInHours =
+      Number(realEndTime - realStartTime) / (1000 * 60 * 60);
+
+    const payableAmount = Math.floor(
+      durationInHours * Number(data.data.pricePerHour)
+    );
+
+    const newPayload = {
       facility: data.data._id,
       date: selectedDate,
       startTime,
       endTime,
     };
+    setFinalData(newPayload)
+    setPayload({ amount: payableAmount * 100, ...newPayload });
+
+    console.log(payableAmount);
+    console.log(durationInHours);
+
+    setShowModal(true);
   };
+
+  const handlePayment = async () => {
+    if (!stripe || !elements || !payload) return;
+    const { amount, newPayload } = payload;
+
+    try {
+      const paymentIntentResponse = await fetch(
+        "http://localhost:3000/api/create-payment-intent",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount,
+            currency: "usd",
+          }),
+        }
+      );
+
+      const { clientSecret } = await paymentIntentResponse.json();
+
+      const { error, paymentIntent } = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: {
+            card: elements.getElement(CardElement)!,
+            billing_details: {
+              name: user?.name,
+              email: user?.email,
+              phone: user?.phone,
+            },
+          },
+        }
+      );
+
+      if (error) {
+        console.error("Payment failed:", error.message);
+        toast.error("Payment failed. Please try again.");
+        setShowModal(false);
+        return;
+      }
+
+      if (paymentIntent?.status === "succeeded") {
+      
+        const bookingResponse = await createBooking(finalData);
+        console.log("Booking successful:", bookingResponse);
+        if(bookingResponse?.data?.success ===true){
+         toast.success("Booking successful"); 
+        }else{
+          toast.error(bookingResponse.error.data.message)
+        }
+     
+        setShowModal(false);
+      }
+    } catch (error) {
+      console.error("Booking failed", error);
+      toast.error("An error occurred. Please try again.");
+    }
+  };
+
   const convertTo12HourFormat = (time: string) => {
     const [hours, minutes] = time.split(":").map(Number);
     const AMPM = hours >= 12 ? "PM" : "AM";
@@ -42,14 +143,12 @@ const BookingFacility = () => {
     return `${adjustedHours}:${minutes.toString().padStart(2, "0")} ${AMPM}`;
   };
 
-  const [createBooking] = useCreateBookingMutation();
-
-  console.log(startTime, endTime);
-
   if (isLoading) {
     return <div className="text-5xl text-center font-bold">Loading</div>;
   }
+
   const facilityData = data.data;
+
   const handleCheckSlot = async (id) => {
     const result = await freeSlot({ id: params.id, date: selectedDate });
     console.log(result.data.data);
@@ -58,18 +157,18 @@ const BookingFacility = () => {
   };
 
   return (
-    <div className="my-28 flex justify-center items-center p-10 md:w-[70%]  lg:w-[55%] mx-auto min-h-[40vh] border-2 bg-gray-200 border-black ">
+    <div className="my-28 flex justify-center items-center p-10 md:w-[70%] lg:w-[55%] mx-auto min-h-[40vh] border-2 bg-gray-200 border-black ">
       <div>
         <p className="font-bold text-3xl">{facilityData.name}</p>
         <p className="font-bold pt-2 text-xl">
-          Pre Hour: ${facilityData.pricePerHour}
+          Per Hour: ${facilityData.pricePerHour}
         </p>
         <div>
-          <p>select a date</p>
-          <div className="flex  flex-col md:flex-row  gap-5 md:items-center">
+          <p>Select a date</p>
+          <div className="flex flex-col md:flex-row gap-5 md:items-center">
             <input
               type="date"
-              className="w-[180px] border-button border-2  p-1 rounded-3xl font-bold"
+              className="w-[180px] border-button border-2 p-1 rounded-3xl font-bold"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
             />
@@ -98,7 +197,7 @@ const BookingFacility = () => {
                   </div>
                 ))}
               </div>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mt-10 flex flex-col md:flex-row gap-10">
                   <div>
                     <p className="mb-2 font-bold text-lg text-gray-700">
@@ -129,6 +228,8 @@ const BookingFacility = () => {
 
                 {startTime && endTime && (
                   <Button
+                    onClick={handlePayment}
+                    htmlType="submit"
                     size="large"
                     className="bg-black w-full uppercase text-white font-bold mt-4"
                   >
@@ -140,6 +241,17 @@ const BookingFacility = () => {
           )}
         </div>
       </div>
+
+      <Modal
+        title="Payment"
+        visible={showModal}
+        onOk={handlePayment}
+        onCancel={() => setShowModal(false)}
+        okText="Pay"
+        cancelText="Cancel"
+      >
+        <CardElement />
+      </Modal>
     </div>
   );
 };

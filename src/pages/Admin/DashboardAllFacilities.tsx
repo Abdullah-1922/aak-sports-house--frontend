@@ -7,6 +7,7 @@ import {
 import { TProps } from "../../types";
 import { Button, Table } from "antd";
 import Swal from "sweetalert2";
+import UpdateFacility from "./UpdateFacility";
 
 const DashboardAllFacilities = () => {
   const [params, setParams] = useState<TProps[]>([]);
@@ -46,6 +47,25 @@ const DashboardAllFacilities = () => {
         }
       }
     });
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState("");
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleUpdate = (productData: any) => {
+    setModalData(productData);
+    showModal();
   };
 
   console.log(semesterData);
@@ -104,10 +124,10 @@ const DashboardAllFacilities = () => {
       title: "Action",
       dataIndex: "action",
       key: "x",
-      render: () => {
+      render: (_, record: any) => {
         return (
           <div>
-            <Button>Update</Button>
+            <Button onClick={() => handleUpdate(record)}>Update</Button>
           </div>
         );
       },
@@ -155,15 +175,23 @@ const DashboardAllFacilities = () => {
   }
 
   return (
-    <Table
-      size="small"
-      className="overflow-x-auto min-h-screen bg-[#F5F5F5] min-w-[1000px]"
-      columns={columns}
-      loading={isFetching}
-      dataSource={tableData}
-      onChange={onChange}
-      showSorterTooltip={{ target: "sorter-icon" }}
-    />
+    <div>
+      <Table
+        size="small"
+        className="overflow-x-auto min-h-screen bg-[#F5F5F5] min-w-[1000px]"
+        columns={columns}
+        loading={isFetching}
+        dataSource={tableData}
+        onChange={onChange}
+        showSorterTooltip={{ target: "sorter-icon" }}
+      />
+      <UpdateFacility
+        facilityData={modalData}
+        handleCancel={handleCancel}
+        handleOk={handleOk}
+        isModalOpen={isModalOpen}
+      />
+    </div>
   );
 };
 

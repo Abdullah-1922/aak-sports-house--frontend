@@ -22,9 +22,10 @@ const LoginPage = () => {
       console.log(result);
       if (result?.data?.success == true) {
         toast.success("Login Successfully");
+        console.log(result.data);
         dispatch(setUser({ user: result.data.data, token: result.data.token }));
         navigate("/");
-      }else{
+      } else {
         toast.error(result?.error?.data?.message);
       }
     } catch (err) {
