@@ -20,7 +20,7 @@ const Facility = () => {
   };
   const [searchQuery, setSearchQuery] = useState("");
   console.log(currentPage, priceRange, searchQuery);
- useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   if (isLoading) {
@@ -34,7 +34,7 @@ const Facility = () => {
     setCurrentPage(page);
     scrollToTop();
   };
- 
+
   const currentData = facilities?.data
     ?.filter((facility: any) => {
       const matchesSearch =
@@ -142,39 +142,39 @@ const Facility = () => {
             </NavLink>
           </div>
         ))}
-        <div
-          className={`${searchQuery ? "hidden" : ""} ${
-            priceRange ? "hidden" : ""
-          }  flex justify-center mt-8`}
+      </div>
+      <div
+        className={` pb-10 ${searchQuery ? "hidden" : ""} ${
+          priceRange ? "hidden" : ""
+        }  flex justify-center mt-8`}
+      >
+        <button
+          disabled={currentPage === 1}
+          onClick={() => handlePageChange(currentPage - 1)}
+          className="mx-2 px-4 py-2 bg-blue-700  text-black rounded disabled:opacity-50"
         >
+          Previous
+        </button>
+        {[...Array(totalPages).keys()].map((pageNumber) => (
           <button
-            disabled={currentPage === 1}
-            onClick={() => handlePageChange(currentPage - 1)}
-            className="mx-2 px-4 py-2 bg-button text-white rounded disabled:opacity-50"
+            key={pageNumber}
+            onClick={() => handlePageChange(pageNumber + 1)}
+            className={`mx-2 px-4 py-2 rounded ${
+              currentPage === pageNumber + 1
+                ? " text-black font-bold text-lg"
+                : "text-white"
+            }`}
           >
-            Previous
+            {pageNumber + 1}
           </button>
-          {[...Array(totalPages).keys()].map((pageNumber) => (
-            <button
-              key={pageNumber}
-              onClick={() => handlePageChange(pageNumber + 1)}
-              className={`mx-2 px-4 py-2 rounded ${
-                currentPage === pageNumber + 1
-                  ? "bg-button text-white"
-                  : "bg-gray-300 text-gray-800"
-              }`}
-            >
-              {pageNumber + 1}
-            </button>
-          ))}
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => handlePageChange(currentPage + 1)}
-            className="mx-2 px-4 py-2 bg-button text-white rounded disabled:opacity-50"
-          >
-            Next
-          </button>
-        </div>
+        ))}
+        <button
+          disabled={currentPage === totalPages}
+          onClick={() => handlePageChange(currentPage + 1)}
+          className="mx-2 px-4 py-2 bg-blue-700 text-black rounded disabled:opacity-50"
+        >
+          Next
+        </button>
       </div>
       {currentData.length < 1 && (
         <div className="text-4xl h-[50vh] text-center font-bold">

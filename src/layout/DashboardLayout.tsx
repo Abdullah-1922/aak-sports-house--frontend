@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Layout, Menu } from "antd";
+import { Button, Layout, Menu } from "antd";
 
 import { sidebarItemsGenerator } from "../utils/sidebarItemsGenerator";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 import { useAppSelector } from "../redux/hooks";
 
@@ -12,21 +12,16 @@ import { userItems } from "../router/UserRoutes";
 
 const { Content, Sider } = Layout;
 
-
-
-
-
 const App: React.FC = () => {
   const currentUser = useAppSelector((state) => state.auth.user);
 
   let sideBarItems;
 
-if(currentUser?.role === 'admin'){
-   sideBarItems = sidebarItemsGenerator(adminItems, "admin");
-}else{
-  sideBarItems = sidebarItemsGenerator(userItems, "user");
-}
-
+  if (currentUser?.role === "admin") {
+    sideBarItems = sidebarItemsGenerator(adminItems, "admin");
+  } else {
+    sideBarItems = sidebarItemsGenerator(userItems, "user");
+  }
 
   return (
     <Layout>
@@ -46,6 +41,14 @@ if(currentUser?.role === 'admin'){
             {currentUser && currentUser.name}
           </p>
           <Menu mode="inline" items={sideBarItems} />
+
+          <div className="  ">
+            <Link to={"/"}>
+              <Button className=" bg-black text-white font-bold  w-full ">
+                Back Home
+              </Button>
+            </Link>
+          </div>
         </div>
       </Sider>
       <Layout>

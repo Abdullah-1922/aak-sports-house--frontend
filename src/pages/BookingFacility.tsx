@@ -72,8 +72,7 @@ const BookingFacility = () => {
     setFinalData(newPayload)
     setPayload({ amount: payableAmount * 100, ...newPayload });
 
-    console.log(payableAmount);
-    console.log(durationInHours);
+
 
     setShowModal(true);
   };
@@ -121,9 +120,10 @@ const BookingFacility = () => {
       if (paymentIntent?.status === "succeeded") {
       
         const bookingResponse = await createBooking(finalData);
-        console.log("Booking successful:", bookingResponse);
+       
         if(bookingResponse?.data?.success ===true){
          toast.success("Booking successful"); 
+         navigate('/user/my-bookings')
         }else{
           toast.error(bookingResponse.error.data.message)
         }

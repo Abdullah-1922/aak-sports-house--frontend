@@ -13,7 +13,6 @@ const MyBookings = () => {
     isFetching,
   } = useGetBookingsByUserQuery(undefined);
 
-  console.log(bookingData?.data);
   const [cancelBooking] = useCancelBookingMutation();
   const handleCancel = async (id: string) => {
     try {
@@ -23,7 +22,7 @@ const MyBookings = () => {
         toast.success("Booking canceled successfully");
       }
     } catch (err) {
-     console.log(err);
+      console.log(err);
     }
   };
 
@@ -41,14 +40,15 @@ const MyBookings = () => {
       key: _id,
       date,
       startTime,
-      endTime,
+    endTime,
       user,
       payableAmount,
       isBooked,
-      location: facility.location,
-      name: facility.name,
+      location: facility?.location,
+      name: facility?.name,
     })
   );
+  console.log(bookingData?.data);
 
   // Defining columns
   const columns = [
@@ -90,10 +90,10 @@ const MyBookings = () => {
     {
       title: "Action",
 
-      render: (_: any, data:any) => {
+      render: (_: any, data: any) => {
         return (
           <Button
-          disabled={data.isBooked === 'canceled'}
+            disabled={data.isBooked === "canceled"}
             onClick={() => handleCancel(data.key)}
             className="bg-red-600 font-bold text-lg text-white"
           >
