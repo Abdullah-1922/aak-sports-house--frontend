@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <div className="bg-black ">
@@ -7,26 +9,26 @@ const Footer = () => {
             Menu
           </div>
           <ul>
-            <li className="my-2">
-              <a className="hover:text-indigo-600" href="#">
-                Home
-              </a>
-            </li>
-            <li className="my-2">
-              <a className="hover:text-indigo-600" href="#">
-                Services
-              </a>
-            </li>
-            <li className="my-2">
-              <a className="hover:text-indigo-600" href="#">
-                Products
-              </a>
-            </li>
-            <li className="my-2">
-              <a className="hover:text-indigo-600" href="#">
-                Pricing
-              </a>
-            </li>
+            <Link to={"/"}>
+              <li className="my-2">
+                <div className="hover:text-indigo-600">Home</div>
+              </li>
+            </Link>
+            <Link to={"/facility"}>
+              <li className="my-2">
+                <div className="hover:text-indigo-600">Facility</div>
+              </li>
+            </Link>
+            <Link to={"/contact-us"}>
+              <li className="my-2">
+                <div className="hover:text-indigo-600">Contact Us</div>
+              </li>
+            </Link>
+            <Link to={"/about"}>
+              <li className="my-2">
+                <div className="hover:text-indigo-600">About us</div>
+              </li>
+            </Link>
           </ul>
         </div>
         <div className="p-5 sm:w-7/12 border-r text-center">

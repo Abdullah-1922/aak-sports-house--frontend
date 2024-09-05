@@ -1,60 +1,32 @@
 import React from "react";
 
 import { Layout, Menu } from "antd";
-import AdminDashboard from "../pages/Admin/AdminDashboard";
-import CreateFacility from "../pages/Admin/CreateFacility";
+
 import { sidebarItemsGenerator } from "../utils/sidebarItemsGenerator";
 import { Outlet } from "react-router-dom";
-import DashboardAllFacilities from "../pages/Admin/DashboardAllFacilities";
+
 import { useAppSelector } from "../redux/hooks";
-import ViewAllBooking from "../pages/Admin/ViewAllBookings";
-import AddAdmin from "../pages/Admin/AddAdmin";
+
+import { adminItems } from "../router/AdminRoutes";
+import { userItems } from "../router/UserRoutes";
 
 const { Content, Sider } = Layout;
 
-export const adminItems = [
-  {
-    name: "Dashboard",
-    path: "dashboard",
-    element: <AdminDashboard />,
-  },
-  {
-    name: "Facility Management",
-    children: [
-      {
-        name: "Create Facility",
-        path: "create-facility",
-        element: <CreateFacility />,
-      },
-      {
-        name: "Facilities",
-        path: "facilities",
-        element: <DashboardAllFacilities />,
-      },
-    ],
-  },
-  {
-    name: "Booking Management",
-    children: [
-      {
-        name: "All Booking",
-        path: "view-all-booking",
-        element: <ViewAllBooking />,
-      },
-    ],
-  },
-  {
-    name: "Add Admin",
-    path: "add-admin",
-    element: <AddAdmin />,
-  },
-];
 
-const newItems = sidebarItemsGenerator(adminItems, "admin");
-console.log(newItems);
+
+
 
 const App: React.FC = () => {
   const currentUser = useAppSelector((state) => state.auth.user);
+
+  let sideBarItems;
+
+if(currentUser?.role === 'admin'){
+   sideBarItems = sidebarItemsGenerator(adminItems, "admin");
+}else{
+  sideBarItems = sidebarItemsGenerator(userItems, "user");
+}
+
 
   return (
     <Layout>
@@ -70,8 +42,10 @@ const App: React.FC = () => {
         }}
       >
         <div className="bg-white pt-4  min-h-screen">
-          <p className=" text-lg text-center font-bold underline pb-5">{currentUser && currentUser.name}</p>
-          <Menu mode="inline" items={newItems} />
+          <p className=" text-lg text-center font-bold underline pb-5">
+            {currentUser && currentUser.name}
+          </p>
+          <Menu mode="inline" items={sideBarItems} />
         </div>
       </Sider>
       <Layout>

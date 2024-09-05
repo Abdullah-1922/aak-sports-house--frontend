@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../../redux/hooks";
 import toast from "react-hot-toast";
 
 const AdminDashboard = () => {

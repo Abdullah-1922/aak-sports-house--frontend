@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import InputComponent from "../../components/Common/form/InputComponent";
-import FormComponent from "../../components/Common/form/FormComponent";
+import InputComponent from "../../../components/Common/form/InputComponent";
+import FormComponent from "../../../components/Common/form/FormComponent";
 
-import { useAddAdminMutation } from "../../redux/features/auth/authApi";
+import { useAddAdminMutation } from "../../../redux/features/auth/authApi";
 
 
 const AddAdmin = () => {

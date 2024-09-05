@@ -34,9 +34,9 @@ const facilityApi = baseApi.injectEndpoints({
         const data = payload.data;
         const id = payload.id;
         return {
-          url: `/facilities/${id}`,
+          url: `/facility/${id}`,
           body: data,
-          method: "PATCH",
+          method: "PUT",
         };
       },
       invalidatesTags: ["facility"],

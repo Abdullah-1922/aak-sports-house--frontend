@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import toast from "react-hot-toast";
-import FormComponent from "../../components/Common/form/FormComponent";
-import InputComponent from "../../components/Common/form/InputComponent";
-import { useCreateFacilityMutation } from "../../redux/features/facility/facilityApi";
+import FormComponent from "../../../components/Common/form/FormComponent";
+import InputComponent from "../../../components/Common/form/InputComponent";
+import { useCreateFacilityMutation } from "../../../redux/features/facility/facilityApi";
 
 const CreateFacility = () => {
   const [createFacility, { isLoading }] = useCreateFacilityMutation();

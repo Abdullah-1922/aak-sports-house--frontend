@@ -6,7 +6,7 @@ import {
 } from "../redux/features/facility/facilityApi";
 import { FormEvent, useState } from "react";
 import { Button, Modal } from "antd";
-import { useCreateBookingMutation } from "../redux/features/facility/bookingApi";
+import { useCreateBookingMutation } from "../redux/features/Booking/bookingApi";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { useAppSelector } from "../redux/hooks";
 import toast from "react-hot-toast";

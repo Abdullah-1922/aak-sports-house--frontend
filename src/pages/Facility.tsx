@@ -2,7 +2,7 @@
 import { Button } from "antd";
 import { useGetFacilitiesQuery } from "../redux/features/facility/facilityApi";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Facility = () => {
   const { data: facilities, isLoading } = useGetFacilitiesQuery(undefined);
@@ -20,7 +20,9 @@ const Facility = () => {
   };
   const [searchQuery, setSearchQuery] = useState("");
   console.log(currentPage, priceRange, searchQuery);
-
+ useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   if (isLoading) {
     return <div>Loading</div>;
   }
@@ -32,7 +34,7 @@ const Facility = () => {
     setCurrentPage(page);
     scrollToTop();
   };
-
+ 
   const currentData = facilities?.data
     ?.filter((facility: any) => {
       const matchesSearch =

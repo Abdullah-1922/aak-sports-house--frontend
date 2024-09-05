@@ -14,10 +14,11 @@ const InputComponent = ({ type, name, label ,defaultValue=''}: TInputProps) => {
   return (
     <div style={{ marginBottom: "20px" }}>
       <Controller
+      defaultValue={defaultValue}
         name={name}
         render={({ field }) => (
           <Form.Item  label={<span style={{ color: "black" ,fontSize:'20px', }}>{label}</span>}>
-            <Input defaultValue={defaultValue} size="large" className="py-3" required {...field} type={type} id={name} />
+            <Input   size="large" className="py-3" required {...field} type={type} id={name} />
           </Form.Item>
         )}
       />

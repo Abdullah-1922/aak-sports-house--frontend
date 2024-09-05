@@ -2,6 +2,7 @@ import { Button } from "antd";
 import { motion } from "framer-motion";
 import heroSvg from "../../assets/realheroimg.png";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 const HomeBanner = () => {
   const [width, setWidth] = useState("9vw");
 
@@ -41,9 +42,9 @@ const HomeBanner = () => {
             </div>
           </div>
         ))}
-        <Button className="text-white text-lg mt-10 px-2 md:px-10 py-5 md:py-7 font-bold uppercase bg-red-600 ">
+      <Link to={'/facility'}> <Button className="text-white text-lg mt-10 px-2 md:px-10 py-5 md:py-7 font-bold uppercase bg-red-600 ">
           Start from today
-        </Button>
+        </Button></Link> 
       </div>
       <div className=" rounded-3xl w-1/2 z-[3]  hidden lg:block ">
         <img className="w-full h-full" src={heroSvg} alt="" />

@@ -5,7 +5,7 @@ import HowToDo from "../components/HomeComponents/HowToDo";
 import HomeCounter from "../components/HomeComponents/HomeCountUp";
 import LocomotiveScroll from "locomotive-scroll";
 import HomeMarquee from "../components/HomeComponents/HomeMarquee";
-import HomeAbout from "../components/AboutPageComponents/AboutPageBanner";
+
 import HomeBanner from "../components/HomeComponents/HomeBanner";
 import HomePageCards from "../components/HomeComponents/HomePageCards";
 import HomePageTestimonials from "../components/HomeComponents/HomePageTestimonials";
@@ -42,7 +42,9 @@ const HomePage = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
     

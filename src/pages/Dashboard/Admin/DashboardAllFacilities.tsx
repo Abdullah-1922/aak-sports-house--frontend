@@ -3,8 +3,8 @@ import { useState } from "react";
 import {
   useDeleteFacilityMutation,
   useGetFacilitiesQuery,
-} from "../../redux/features/facility/facilityApi";
-import { TProps } from "../../types";
+} from "../../../redux/features/facility/facilityApi";
+import { TProps } from "../../../types";
 import { Button, Table } from "antd";
 import Swal from "sweetalert2";
 import UpdateFacility from "./UpdateFacility";

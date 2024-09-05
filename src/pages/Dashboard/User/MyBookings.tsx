@@ -1,22 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
-import { Table } from "antd";
-import { useGetAllBookingsQuery } from "../../redux/features/facility/bookingApi";
+import { Button, Table } from "antd";
+import {
+  useCancelBookingMutation,
+  useGetBookingsByUserQuery,
+} from "../../../redux/features/Booking/bookingApi";
+import toast from "react-hot-toast";
 
-// Assuming TProps contains the necessary query parameters
-const ViewAllBooking = () => {
-  const [params, setParams] = useState<any[]>([]); // Adjust TProps type as per your actual query parameters
-
+const MyBookings = () => {
   const {
     data: bookingData,
     isLoading,
     isFetching,
-  } = useGetAllBookingsQuery(params);
+  } = useGetBookingsByUserQuery(undefined);
 
-  console.log(bookingData);
-  console.log({ isLoading, isFetching });
+  console.log(bookingData?.data);
+  const [cancelBooking] = useCancelBookingMutation();
+  const handleCancel = async (id: string) => {
+    try {
+      const res = await cancelBooking(id);
+      console.log(res);
+      if (res.data.data.success == true) {
+        toast.success("Booking canceled successfully");
+      }
+    } catch (err) {
+     console.log(err);
+    }
+  };
 
-  // Mapping data to table structure
   const tableData = bookingData?.data?.map(
     ({
       _id,
@@ -25,11 +35,8 @@ const ViewAllBooking = () => {
       endTime,
       payableAmount,
       isBooked,
-      name,
-      location,
+      facility,
       user,
-      pricePerHour,
-      description,
     }: any) => ({
       key: _id,
       date,
@@ -38,15 +45,23 @@ const ViewAllBooking = () => {
       user,
       payableAmount,
       isBooked,
-      name,
-      location,
-      pricePerHour,
-      description,
+      location: facility.location,
+      name: facility.name,
     })
   );
 
   // Defining columns
   const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Location",
+      dataIndex: "location",
+      key: "location",
+    },
     {
       title: "Date",
       dataIndex: "date",
@@ -63,7 +78,7 @@ const ViewAllBooking = () => {
       dataIndex: "endTime",
     },
     {
-      title: "Payable Amount",
+      title: "Payable Amount ($)",
       key: "payableAmount",
       dataIndex: "payableAmount",
     },
@@ -71,6 +86,21 @@ const ViewAllBooking = () => {
       title: "isBooked",
       key: "isBooked",
       dataIndex: "isBooked",
+    },
+    {
+      title: "Action",
+
+      render: (_: any, data:any) => {
+        return (
+          <Button
+          disabled={data.isBooked === 'canceled'}
+            onClick={() => handleCancel(data.key)}
+            className="bg-red-600 font-bold text-lg text-white"
+          >
+            cancel
+          </Button>
+        );
+      },
     },
   ];
 
@@ -93,4 +123,4 @@ const ViewAllBooking = () => {
   );
 };
 
-export default ViewAllBooking;
+export default MyBookings;
