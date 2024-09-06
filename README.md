@@ -1,50 +1,38 @@
-# React + TypeScript + Vite
+# AAK Sports House
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
+This project serves as the frontend part of the AAK Sports House application, enabling users to browse sports facilities, book them, and proceed through the checkout process.
 
-Currently, two official plugins are available:
+## Project Overview
+AAK Sports House is a full-featured web application designed to simplify the experience of browsing, booking, and managing sports facilities. It offers an intuitive user interface with a responsive layout, allowing users to search for venues, verify availability, and make bookings with ease. The application provides a dedicated user dashboard for booking management, as well as an admin dashboard for managing facilities and monitoring user bookings. The platform is supported by a secure backend that handles payments, user authentication, and data management, ensuring a smooth and user-friendly experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Link : https://aak-sports-house.web.app
 
-## Expanding the ESLint configuration
+## Key Features
+- **User Dashboard**: Manage bookings, view their statuses.
+- **Admin Dashboard**: Admins can manage sports facilities and oversee user bookings.
+- **Search & Filter**: Easily search for facilities and filter results by name, location, and price.
+- **Interactive Booking**: Check real-time availability and book facilities with integrated secure payments.
+- **Responsive Design**: Optimized for mobile, tablet, and desktop devices.
+- **Custom Error Pages**: Includes personalized 404 and unauthorized access pages with clear navigation.
+- **User Feedback Slider**: Displays user reviews to enhance credibility.
+- **Back to Top Button**: Provides easy navigation to quickly return to the top of the page.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technology Stack
+- React
+- TypeScript
+- Redux Toolkit
+- React Router
+- Tailwind CSS
+- Stripe (Payment)
 
-- Configure the top-level `parserOptions` property like this:
+## Installation Instructions
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Prerequisites
+- Node.js (version 14 or higher)
+- npm (version 6 or higher) or yarn (version 1.22 or higher)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Steps to Install
+1. Clone the repository:
+   ```bash
+   https://github.com/Abdullah-1922/aak-sports-house-frontend.git

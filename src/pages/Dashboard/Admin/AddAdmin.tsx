@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+
 import InputComponent from "../../../components/Common/form/InputComponent";
 import FormComponent from "../../../components/Common/form/FormComponent";
 
 import { useAddAdminMutation } from "../../../redux/features/auth/authApi";
+import { TError } from "../../../types";
 
 
 const AddAdmin = () => {
@@ -19,8 +20,8 @@ const AddAdmin = () => {
         toast.success("Admin Added Successfully");
        
         
-      } else {
-        toast.error(result?.error?.data?.message);
+      }  else {
+        toast.error((result?.error as TError)?.data?.message || 'Something Error Happened');
       }
     } catch (err) {
       console.log(err);

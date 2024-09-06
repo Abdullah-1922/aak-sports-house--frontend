@@ -8,7 +8,7 @@ const TeamSection = () => {
 
         <div className="grid md:grid-cols-3 gap-16">
           <div className="space-y-4 p-5">
-            <div href="#" target="_blank" className="space-y-4 ">
+            <div   className="space-y-4 ">
               <img
                 src="https://randomuser.me/api/portraits/men/1.jpg"
                 className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
@@ -21,8 +21,8 @@ const TeamSection = () => {
 
             <div className="flex space-x-4 gap-3 justify-center items-center">
               <a
-                href="#"
-                target="_blank"
+                
+                
                 className="text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Twitter</span>
@@ -55,7 +55,7 @@ const TeamSection = () => {
           </div>
 
           <div className="space-y-4 p-5">
-            <div href="#" target="_blank" className="space-y-4">
+            <div   className="space-y-4">
               <img
                 src="https://randomuser.me/api/portraits/men/4.jpg"
                 className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
@@ -68,8 +68,8 @@ const TeamSection = () => {
 
             <div className="flex space-x-4 gap-3 justify-center items-center">
               <a
-                href="#"
-                target="_blank"
+                
+                
                 className="text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Twitter</span>
@@ -85,8 +85,8 @@ const TeamSection = () => {
               </a>
 
               <a
-                href="#"
-                target="_blank"
+                
+                
                 className="text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">GitHub</span>
@@ -106,7 +106,7 @@ const TeamSection = () => {
             </div>
           </div>
           <div className="space-y-4 p-5">
-            <div href="#" target="_blank" className="space-y-4 ">
+            <div   className="space-y-4 ">
               <img
                 src="https://randomuser.me/api/portraits/men/1.jpg"
                 className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
@@ -119,8 +119,8 @@ const TeamSection = () => {
 
             <div className="flex space-x-4 gap-3 justify-center items-center">
               <a
-                href="#"
-                target="_blank"
+                
+                
                 className="text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Twitter</span>
@@ -153,7 +153,7 @@ const TeamSection = () => {
           </div>
 
           <div className="space-y-4 p-5">
-            <div href="#" target="_blank" className="space-y-4">
+            <div   className="space-y-4">
               <img
                 src="https://randomuser.me/api/portraits/men/4.jpg"
                 className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
@@ -166,8 +166,8 @@ const TeamSection = () => {
 
             <div className="flex space-x-4 gap-3 justify-center items-center">
               <a
-                href="#"
-                target="_blank"
+                
+                
                 className="text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Twitter</span>
@@ -183,8 +183,8 @@ const TeamSection = () => {
               </a>
 
               <a
-                href="#"
-                target="_blank"
+                
+                
                 className="text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">GitHub</span>
@@ -204,7 +204,7 @@ const TeamSection = () => {
             </div>
           </div>
           <div className="space-y-4 p-5">
-            <div href="#" target="_blank" className="space-y-4 ">
+            <div   className="space-y-4 ">
               <img
                 src="https://randomuser.me/api/portraits/men/1.jpg"
                 className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
@@ -217,8 +217,8 @@ const TeamSection = () => {
 
             <div className="flex space-x-4 gap-3 justify-center items-center">
               <a
-                href="#"
-                target="_blank"
+                
+                
                 className="text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Twitter</span>
@@ -251,7 +251,7 @@ const TeamSection = () => {
           </div>
 
           <div className="space-y-4 p-5">
-            <div href="#" target="_blank" className="space-y-4">
+            <div   className="space-y-4">
               <img
                 src="https://randomuser.me/api/portraits/men/4.jpg"
                 className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
@@ -264,8 +264,8 @@ const TeamSection = () => {
 
             <div className="flex space-x-4 gap-3 justify-center items-center">
               <a
-                href="#"
-                target="_blank"
+                
+                
                 className="text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">Twitter</span>
@@ -281,8 +281,8 @@ const TeamSection = () => {
               </a>
 
               <a
-                href="#"
-                target="_blank"
+                
+                
                 className="text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">GitHub</span>

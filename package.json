@@ -18,6 +18,7 @@
     "@types/three": "^0.167.2",
     "antd": "^5.20.3",
     "clsx": "^2.1.1",
+    "firebase": "^10.13.1",
     "framer-motion": "^11.3.31",
     "locomotive-scroll": "^5.0.0-beta.15",
     "lottie-react": "^2.4.0",

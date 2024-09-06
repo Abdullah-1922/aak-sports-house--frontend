@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion } from "framer-motion";
 
 import { useInView } from "react-intersection-observer";
@@ -32,7 +33,7 @@ const HomePageCards = () => {
         ))}
       </div>
       <div className="grid grid-cols-1 px-[15vw] mt-10 gap-10 md:grid-cols-2 ">
-        {data.data.slice(0, 4).map((item, ind) => (
+        {data?.data?.slice(0, 4).map((item:any, ind:number) => (
           <div
             key={ind}
             className="p-8 m-10 border  border-indigo-300 rounded-2xl hover:shadow hover:shadow-indigo-50 mx-auto w-full flex flex-col items-center"
@@ -42,12 +43,12 @@ const HomePageCards = () => {
               className="shadow rounded-lg w-full h-full object-cover overflow-hidden border"
             />
             <div className="mt-8">
-              <h4 className="font-bold text-xl">{item.name}</h4>
+              <h4 className="font-bold text-xl">{item?.name}</h4>
               <p className="mt-2 text-black">
                 {item.description.slice(0, 100)}....
               </p>
               <div className="mt-5">
-                <Link to={`/facility/${item._id}`}>
+                <Link to={`/facility/${item?._id}`}>
                   <button
                     type="button"
                     className="inline-flex items-center  rounded-md border border-transparent bg-[#CDEA68] px-6 py-3  font-bold hover:border hover:border-white  leading-4 hover:text-white text-black shadow-sm hover:bg-gray-900"

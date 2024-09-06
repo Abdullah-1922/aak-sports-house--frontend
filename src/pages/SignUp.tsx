@@ -6,6 +6,7 @@ import { useSignUpMutation } from "../redux/features/auth/authApi";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
 import { logout } from "../redux/features/auth/authSlice";
+import { TError } from "../types";
 
 const SignUp = () => {
   const [signUp] = useSignUpMutation();
@@ -20,7 +21,7 @@ const SignUp = () => {
         dispatch(logout());
         navigate("/login");
       } else {
-        toast.error(result?.error?.data?.message);
+        toast.error((result?.error as TError)?.data?.message);
       }
     } catch (err) {
       console.log(err);

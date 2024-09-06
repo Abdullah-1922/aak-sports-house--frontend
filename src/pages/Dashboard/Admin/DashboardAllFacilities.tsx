@@ -5,9 +5,10 @@ import {
   useGetFacilitiesQuery,
 } from "../../../redux/features/facility/facilityApi";
 import { TProps } from "../../../types";
-import { Button, Table } from "antd";
+import { Button, Table, TableColumnsType } from "antd";
 import Swal from "sweetalert2";
 import UpdateFacility from "./UpdateFacility";
+import { TFacility } from "../../../types/FacilityTypes";
 
 const DashboardAllFacilities = () => {
   const [params, setParams] = useState<TProps[]>([]);
@@ -71,7 +72,7 @@ const DashboardAllFacilities = () => {
   console.log(semesterData);
   console.log({ isLoading, isFetching });
   const tableData = semesterData?.data?.map(
-    ({ _id, name, location, pricePerHour, image, description }) => ({
+    ({ _id, name, location, pricePerHour, image, description }: any) => ({
       key: _id,
       name,
       location,
@@ -81,7 +82,7 @@ const DashboardAllFacilities = () => {
     })
   );
 
-  const columns = [
+  const columns: TableColumnsType<TFacility> = [
     {
       title: "Image",
       dataIndex: "image",
@@ -124,7 +125,7 @@ const DashboardAllFacilities = () => {
       title: "Action",
       dataIndex: "action",
       key: "x",
-      render: (_, record: any) => {
+      render: (_: any, record: any) => {
         return (
           <div>
             <Button onClick={() => handleUpdate(record)}>Update</Button>
@@ -136,7 +137,7 @@ const DashboardAllFacilities = () => {
       title: "Action",
       dataIndex: "action",
       key: "x",
-      render: (_, record: any) => {
+      render: (_: any, record: any) => {
         return (
           <div>
             <Button
@@ -151,17 +152,16 @@ const DashboardAllFacilities = () => {
     },
   ];
 
-  const onChange: ["onChange"] = (pagination, filters, sorter, extra) => {
-    console.log({ filters, extra });
+  const onChange = (filters: any, extra: any) => {
     if (extra.action === "filter") {
       const queryParams: TProps[] = [];
       if (filters.name) {
-        filters?.name?.forEach((item) => {
+        filters?.name?.forEach((item: any) => {
           queryParams.push({ name: "name", value: item as string });
         });
       }
       if (filters.year) {
-        filters?.year?.forEach((item) => {
+        filters?.year?.forEach((item: any) => {
           queryParams.push({ name: "year", value: item as string });
         });
       }

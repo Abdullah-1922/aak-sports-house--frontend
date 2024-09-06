@@ -12,8 +12,9 @@ import HomePageTestimonials from "../components/HomeComponents/HomePageTestimoni
 import HomePageImageGallery from "../components/HomeComponents/HomePageImageGallery";
 
 const HomePage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const locomotiveScroll = new LocomotiveScroll();
+  
+   new LocomotiveScroll();
+ 
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 

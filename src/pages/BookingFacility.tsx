@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -10,6 +11,7 @@ import { useCreateBookingMutation } from "../redux/features/Booking/bookingApi";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { useAppSelector } from "../redux/hooks";
 import toast from "react-hot-toast";
+import { TError } from "../types";
 
 type TSlotTime = {
   startTime: string;
@@ -69,21 +71,19 @@ const BookingFacility = () => {
       startTime,
       endTime,
     };
-    setFinalData(newPayload)
+    setFinalData(newPayload);
     setPayload({ amount: payableAmount * 100, ...newPayload });
-
-
 
     setShowModal(true);
   };
 
   const handlePayment = async () => {
     if (!stripe || !elements || !payload) return;
-    const { amount, newPayload } = payload;
+    const { amount } = payload;
 
     try {
       const paymentIntentResponse = await fetch(
-        "http://localhost:3000/api/create-payment-intent",
+        "https://assignment-3-lovat-seven.vercel.app/api/create-payment-intent",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -118,16 +118,15 @@ const BookingFacility = () => {
       }
 
       if (paymentIntent?.status === "succeeded") {
-      
         const bookingResponse = await createBooking(finalData);
-       
-        if(bookingResponse?.data?.success ===true){
-         toast.success("Booking successful"); 
-         navigate('/user/my-bookings')
-        }else{
-          toast.error(bookingResponse.error.data.message)
+
+        if (bookingResponse?.data?.success === true) {
+          toast.success("Booking successful");
+          navigate("/user/my-bookings");
+        }  else {
+          toast.error((bookingResponse?.error as TError)?.data?.message || 'Something Error Happened');
         }
-     
+
         setShowModal(false);
       }
     } catch (error) {
@@ -149,7 +148,7 @@ const BookingFacility = () => {
 
   const facilityData = data.data;
 
-  const handleCheckSlot = async (id) => {
+  const handleCheckSlot = async (_id:string) => {
     const result = await freeSlot({ id: params.id, date: selectedDate });
     console.log(result.data.data);
 

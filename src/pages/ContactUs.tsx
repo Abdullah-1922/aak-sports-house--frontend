@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 
 const ContactUs = () => {
-    const handleSubmit=(e)=>{
+    const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
      e.preventDefault()
         toast.success('Message send successfully')
     }

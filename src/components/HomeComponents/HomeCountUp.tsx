@@ -5,7 +5,7 @@ const HomeCounter = () => {
   useCountUp({ ref: "weeklyUser", end: 6000, duration: 4, delay: 1 });
   useCountUp({ ref: "Different Sports", end: 23, duration: 2 });
   useCountUp({ ref: "feedbackCounter", end: 96, duration: 2 });
-  useCountUp({ ref: "projectsCounter", end: 77, duration: 2 });
+  useCountUp({ ref: "Repeat customer", end: 77, duration: 2 });
 
   return (
     <div className=" px-20 w-[60vw] z-[9999] relative mx-auto border mt-10 bg-zinc-900 rounded-3xl text-white   shadow-sm">
@@ -29,8 +29,8 @@ const HomeCounter = () => {
         />
 
         <CounterItem
-          title="3 feet tip user."
-          counter={<span id="projectsCounter" />}
+          title="Repeat customer"
+          counter={<span id="Repeat customer" />}
           measurement="%"
         />
       </div>

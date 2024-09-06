@@ -6,6 +6,10 @@ import { useLoginMutation } from "../redux/features/auth/authApi";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/features/auth/authSlice";
+import { TError } from "../types";
+
+
+
 
 const LoginPage = () => {
   const [login] = useLoginMutation();
@@ -18,17 +22,18 @@ const LoginPage = () => {
     };
 
     try {
-      const result = await login(userInfo);
-      console.log(result);
+      const result  = await login(userInfo);
+    console.log(result);
       if (result?.data?.success == true) {
         toast.success("Login Successfully");
         console.log(result.data);
         dispatch(setUser({ user: result.data.data, token: result.data.token }));
         navigate("/");
-      } else {
-        toast.error(result?.error?.data?.message);
       }
-    } catch (err) {
+       else {
+        toast.error((result?.error as TError)?.data?.message || 'Something Error Happened');
+      }
+    } catch (err:any) {
       console.log(err);
     }
   };

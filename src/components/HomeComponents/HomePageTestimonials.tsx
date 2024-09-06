@@ -24,7 +24,7 @@ const HomePageTestimonials = () => {
         dotPosition="bottom"
         className="custom-carousel"
       >
-        {[1, 2, 3, 4].map((item, ind) => (
+        {[1, 2, 3, 4].map((_item, ind) => (
           <div>
             <div
               key={ind}

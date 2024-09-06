@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const Facility = () => {
   const { data: facilities, isLoading } = useGetFacilitiesQuery(undefined);
-
+ console.log(facilities);
   const [currentPage, setCurrentPage] = useState(1);
   const [priceRange, setPriceRange] = useState<string>("");
 
@@ -176,7 +176,7 @@ const Facility = () => {
           Next
         </button>
       </div>
-      {currentData.length < 1 && (
+      {currentData?.length < 1 && (
         <div className="text-4xl h-[50vh] text-center font-bold">
           No data Found
         </div>
